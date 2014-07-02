@@ -38,14 +38,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "stringhelper.h"
 #include "tLog_Category_default.h"
 
-//#include "hidedata.h"
 #include "rimg_rgb_names.h"
 #include "rList.h"
 #include "wList.h"
 #include "t_filename.h"
 #include "boost_cstdint.h"
 #include "timer.h"
-//#include "hidedata.h"
+#include "rimg_read_write.h"
 
 using namespace rlf;
 
@@ -57,7 +56,7 @@ using rlf::rimg_linear::tImgViewLinear;
 using namespace rlf::rimg_math;
 using namespace rlf::rimg_rw;
 using rlf_htime::tTimer;
-
+using rlf_filefn::t_filename;
 
 
 
@@ -72,7 +71,7 @@ namespace {
 
       try {
          tTimer            timer3;
-         rlf::rimg_rw::read( "0b_gray.bmp", img1 );
+         read( "0b_gray.bmp", img1 );
          double s =              timer3.seconds();
          string secs = str::toString( s, 8, 6 );
          cout << secs << " sec" << endl;
@@ -127,6 +126,7 @@ namespace {
 
 
 
+
    void do_demo_planar_rgb() {
 
       //tMask mask = tMask::rgb;
@@ -139,13 +139,68 @@ namespace {
 
       try {
 
+         tTimer timer;
 
          LOGT_INFO( "ready" );
 
-         read( "0b_gray.jpeg", source );
-         rlf::rimg_rw::write( "a.BMP", source, true );
+         vector<string> files = {
 
-         read( "a.BMP", source );
+             "0b.tif",
+             "0b_gray.tif",
+             "0b_pal.tif",
+//             "4.1.05.tiff",
+//             "4.2.03.tiff",
+//             "5.1.09.tiff",
+//             "136jk081.tif",
+//             "a16.tif",
+//             "a_image.tif",
+//             "DeltaE_8bit_gamma2.2.tif",
+//             "lena512color.tiff",
+//             "lena_std.tif",
+//             "numbers.512.tiff",
+//             "ruler.512.tiff",
+//            "testpat.1k.tiff",
+//            "testsobel.tif",
+//            "texmos1.p512.tiff",
+//            "texmos3.s512.tiff",
+//            "wash-ir.tiff",
+//            "wf.tif",
+//            "wf_out.tif",
+
+
+//              "12_16_bit.tif"
+
+         };
+
+         for( string im:files){
+             string tmp = im;
+            string d = "tst/";
+            string da = "tst/a/";
+            im = d + im;
+            tTimer a;
+            LOGT_INFO(im);
+            cout << im << endl;
+            t_filename fn(im);
+
+            LOGT_INFO("read : "+ fn.fullname());
+            read( fn.fullname(), source );
+            string sec = to_string( a.seconds() );
+            LOGT_INFO(sec);
+            cout << sec << endl;
+            tTimer b;
+            string o = da + "00a_" + tmp + ".tif";
+            rlf::rimg_rw::write( o, source, true );
+            cout << o << endl;
+            sec = to_string( b.seconds() );
+            LOGT_INFO(sec);
+            cout <<  sec << endl;
+            LOGT_INFO("write: "+ o);
+            cout << endl;
+         }
+
+
+         double s = timer.seconds();
+         read( "large.bmp", source );
          rlf::rimg_rw::write( "ab.BMP", source, true );
          string img1 = "ab.BMP";
          read( img1, ctrl );
@@ -160,7 +215,7 @@ namespace {
          tPlaneLinear8 linear;
          rimg_math::ToExtendedLinearArea( source.mono8(), linear, 1 );
 
-         rimg_rw::read( "ab.BMP", source );
+         rimg_rw::read( "a1.BMP", source );
 
 
          rlf::rimg_rw::write( "a.tif", source, true );
@@ -219,6 +274,7 @@ namespace {
       } catch( runtime_error rte ) {
          string msg = rte.what();
          string id = typeid( rte ).name();
+         LOGT_ERROR( "Ex: " + msg );
          cout << "Ex: " + msg << endl;
          exit( 0 );
       }
@@ -238,9 +294,20 @@ int main() {
    // == (bin) 10000000000000000000000000000000 bin
 
 
+   uint64_t size_ = UINTMAX_MAX;
+   uint64_t size_1 = -1;
+if( size_ < 100 ){
+   cout << endl;
+}
+if( size_1 < 100 ){
+   cout << endl;
+}
+
+
    rlf_tlog::logger().setLogfile( "hidden" );
    rlf_tlog::logger().setLogLevel( rlf_tlog::eLevel::LDEBUG );
    LOGT_INFO( "start" );
+   LOGT_INFO( "===================================" );
 
    // test
    //int sizeof_size_t = sizeof( size_t );

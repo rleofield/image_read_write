@@ -44,7 +44,7 @@ QMAKE_CXXFLAGS_RELEASE += -Wunused-parameter
 QMAKE_CXXFLAGS_RELEASE -= -Wwrite-strings
 QMAKE_CXXFLAGS_RELEASE -= -Wunused-variable
 QMAKE_CXXFLAGS_RELEASE += -msse
-#QMAKE_CXXFLAGS_RELEASE += -Weffc++
+QMAKE_CXXFLAGS_RELEASE += -Weffc++
 
 
 message("qmake image_read_write")
@@ -52,8 +52,6 @@ message("qmake image_read_write")
 
 SOURCES += \
     src/filefn/t_filename.cpp \
-    src/ftw/filetreewalk.cpp \
-    src/hfile/t_ifncontrol.cpp \
     src/hfile/filehelper.cpp \
     src/hstring/stringhelper.cpp \
     src/hstring/gettokens.cpp \
@@ -81,7 +79,6 @@ SOURCES += \
     src/img/rimg_bin_luts.cpp \
     src/img/rimg_aoi.cpp \
     src/img/rw/rimg_test_raw_rw.cpp \
-    src/img/rw/rimg_rw_tiff.cpp \
     src/img/rw/rimg_rw_raw.cpp \
     src/img/rw/rimg_rw_png.cpp \
     src/img/rw/rimg_rw_jpeg.cpp \
@@ -96,12 +93,16 @@ SOURCES += \
     src/img/rw/rimg_planar.cpp \
     src/img/rw/rimg_write.cpp \
     src/img/rw/rimg_read.cpp \
-    src/img/rw/rimg_resolve_type.cpp
+    src/img/rw/rimg_resolve_type.cpp \
+    src/hfile/fn_control.cpp \
+    src/filefn/filetreewalk.cpp \
+    src/img/rw/rimg_tiff_r.cpp \
+    src/img/rw/rimg_tiff_w.cpp \
+    src/img/rw/rimg_tiff_r_decode.cpp
 
 HEADERS += \
     src/filefn/t_filename.h \
     src/filefn/boost_cstdint.h \
-    src/ftw/filetreewalk.h \
     src/hfile/t_fncontrol.h \
     src/hfile/filehelper.h \
     src/hstring/stringhelper.h \
@@ -154,13 +155,31 @@ HEADERS += \
     src/minit/t_2D_xy.h \
     src/minit/t_2D_Matrix.h \
     src/minit/boost_cstdint.h \
-    src/boost/boost_cstdint.h \
-    src/hide/h_result.h \
-    src/hide/h_e_mode.h \
-    src/hide/h_raw_data_hide.h \
     src/htime/timer.h \
     src/img/rw/rimg_resolve_image_type.h \
-    src/log/tLog_Category_rimg.h
+    src/log/tLog_Category_rimg.h \
+    src/hfile/fn_control.h \
+    src/log/tLog_Category_with_cout.h \
+    src/filefn/filetreewalk.h \
+    src/filefn/filetreewalk_ref.h \
+    src/log/tLog_Category_tiff.h \
+    src/img/rw/rimg_tiff.h \
+    src/img/rimg_t_read.h \
+    src/img/rimg_t_write.h \
+    src/log/tLfm.h \
+    src/log/tLfmCL.h \
+    src/log/tLog.h \
+    src/log/tLogCategories.h \
+    src/log/tLog_Category_A.h \
+    src/log/tLog_Category_B.h \
+    src/log/tLog_Category_C.h \
+    src/log/tLog_Category_D.h \
+    src/log/tLog_Category_default.h \
+    src/log/tLog_Category_rimg.h \
+    src/log/tLog_Category_tiff.h \
+    src/log/tLogEnum.h \
+    src/log/tLogImpl.h \
+    src/filefn/filetreewalk.h
 
 
 INCLUDEPATH += $$PWD/src
