@@ -42,9 +42,10 @@ QMAKE_CXXFLAGS_RELEASE += -Wshadow
 QMAKE_CXXFLAGS_RELEASE += -Wextra
 QMAKE_CXXFLAGS_RELEASE += -Wunused-parameter
 QMAKE_CXXFLAGS_RELEASE -= -Wwrite-strings
-QMAKE_CXXFLAGS_RELEASE -= -Wunused-variable
+QMAKE_CXXFLAGS_RELEASE += -Wno-unused-variable
+QMAKE_CXXFLAGS_RELEASE += -Wno-unused-but-set-variable
 QMAKE_CXXFLAGS_RELEASE += -msse
-QMAKE_CXXFLAGS_RELEASE += -Weffc++
+#QMAKE_CXXFLAGS_RELEASE += -Weffc++
 
 
 message("qmake image_read_write")
