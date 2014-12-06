@@ -93,9 +93,9 @@ namespace rlf_htime {
 #endif // HAS_STD_PUT_TIME
 
       // ms
-//      now.fill( '0' );
-//      now.width( 3 );
-//      now << modulo;
+      //      now.fill( '0' );
+      //      now.width( 3 );
+      //      now << modulo;
 
       return now.str();
    }
