@@ -36,12 +36,10 @@ Lib: librimgrw
 #include <vector>
 #include <string>
 
-#include "boost_cstdint.h"
 
 
 using std::string;
 using std::vector;
-//using rlf::uint8_t;
 
 namespace rlf {
 

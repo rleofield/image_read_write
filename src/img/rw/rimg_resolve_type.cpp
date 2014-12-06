@@ -32,8 +32,6 @@ Lib: librimgrw
 #include <string>
 
 
-#include "boost_cstdint.h"
-
 #include "rBin.h"
 #include "rimg_resolve_image_type.h"
 #include "rimg_t_read.h"

@@ -26,10 +26,8 @@
 #ifndef BANDPASS_H
 #define BANDPASS_H
 
-#include "boost_cstdint.h"
 
 #include "t_2D_xy.h"
-//#include "rimg_xy_types.h"
 
 #include "rlf_blobs.h"
 

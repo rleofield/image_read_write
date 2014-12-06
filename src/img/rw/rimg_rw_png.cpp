@@ -53,7 +53,6 @@ using namespace std;
 #include "rimg_t_read.h"
 #include "rimg_t_write.h"
 
-
 using rlf::rimg_planar::tImgPlanar;
 using rlf::rimg_linear::tImgLinear;
 using rlf::rimg_linear::tImgViewLinear;

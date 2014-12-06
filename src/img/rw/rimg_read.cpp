@@ -33,12 +33,7 @@ Lib: librimgrw
 #include <string>
 #include <boost/shared_ptr.hpp>
 
-
-#include "boost_cstdint.h"
-
 #include "rimg_rw_exceptions.h"
-
-
 #include "rimg_linear.h"
 #include "rimg_planar.h"
 #include "rimg_read_write_bin.h"

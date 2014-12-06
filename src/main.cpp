@@ -38,14 +38,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "stringhelper.h"
 #include "tLog_Category_default.h"
 
-//#include "hidedata.h"
 #include "rimg_rgb_names.h"
 #include "rList.h"
 #include "wList.h"
 #include "t_filename.h"
-#include "boost_cstdint.h"
 #include "timer.h"
-//#include "hidedata.h"
 #include "t_filename.h"
 #include "rimg_read_write.h"
 

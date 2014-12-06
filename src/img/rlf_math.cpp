@@ -28,9 +28,6 @@
 #include <limits.h>
 #include <assert.h>
 
-//#include "rimg_imgsize_type.h"
-
-//#include "rimg_xy_types.h"
 #include "rlf_math.h"
 
 using namespace std;
@@ -38,9 +35,6 @@ using namespace std;
 
 namespace rlf {
    namespace math {
-
-
-
 
       double Gauss( double stddev, double x ) {
          double gauss = ::exp( -0.5 * ( x * x ) / ( stddev * stddev ) ) / sqrt( 2 * PI );

@@ -23,7 +23,7 @@ QMAKE_CXXFLAGS_DEBUG += -Wparentheses
 QMAKE_CXXFLAGS_DEBUG += -Wreturn-type
 QMAKE_CXXFLAGS_DEBUG += -Wshadow
 QMAKE_CXXFLAGS_DEBUG += -Wextra
-QMAKE_CXXFLAGS_DEBUG += -Wunused-parameter
+QMAKE_CXXFLAGS_DEBUG += -Wno-unused-parameter
 QMAKE_CXXFLAGS_DEBUG -= -Wwrite-strings
 QMAKE_CXXFLAGS_DEBUG -= -Wunused-variable
 QMAKE_CXXFLAGS_DEBUG += -Wno-unused-variable
@@ -40,7 +40,7 @@ QMAKE_CXXFLAGS_RELEASE += -Wparentheses
 QMAKE_CXXFLAGS_RELEASE += -Wreturn-type
 QMAKE_CXXFLAGS_RELEASE += -Wshadow
 QMAKE_CXXFLAGS_RELEASE += -Wextra
-QMAKE_CXXFLAGS_RELEASE += -Wunused-parameter
+QMAKE_CXXFLAGS_RELEASE += -Wno-unused-parameter
 QMAKE_CXXFLAGS_RELEASE -= -Wwrite-strings
 QMAKE_CXXFLAGS_RELEASE += -Wno-unused-variable
 QMAKE_CXXFLAGS_RELEASE += -Wno-unused-but-set-variable
@@ -103,7 +103,6 @@ SOURCES += \
 
 HEADERS += \
     src/filefn/t_filename.h \
-    src/filefn/boost_cstdint.h \
     src/hfile/t_fncontrol.h \
     src/hfile/filehelper.h \
     src/hstring/stringhelper.h \
@@ -156,6 +155,10 @@ HEADERS += \
     src/minit/t_2D_xy.h \
     src/minit/t_2D_Matrix.h \
     src/minit/boost_cstdint.h \
+    src/boost/boost_cstdint.h \
+    src/hide/h_result.h \
+    src/hide/h_e_mode.h \
+    src/hide/h_raw_data_hide.h \
     src/htime/timer.h \
     src/img/rw/rimg_resolve_image_type.h \
     src/log/tLog_Category_rimg.h \
@@ -186,7 +189,6 @@ HEADERS += \
 INCLUDEPATH += $$PWD/src
 INCLUDEPATH += $$PWD/src/log
 INCLUDEPATH += $$PWD/src/minit
-INCLUDEPATH += $$PWD/src/boost
 INCLUDEPATH += $$PWD/src/ftw
 INCLUDEPATH += $$PWD/src/filefn
 INCLUDEPATH += $$PWD/src/hfile

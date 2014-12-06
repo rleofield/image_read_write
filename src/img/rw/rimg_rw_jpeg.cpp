@@ -40,7 +40,6 @@ Lib: librimgrw
 * the second part of the example.
 */
 #include <setjmp.h>
-#include "boost_cstdint.h"
 #include "rimg_fs.h"
 #include "jpeglib.h"
 
