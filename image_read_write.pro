@@ -88,7 +88,6 @@ SOURCES += \
     src/img/rw/rimg_fs.cpp \
     src/img/rw/rimg_convert.cpp \
     src/img/rw/rimg_alloc_raw_data.cpp \
-    src/main.cpp \
     src/htime/timer.cpp \
     src/img/rw/rimg_linear.cpp \
     src/img/rw/rimg_planar.cpp \
@@ -99,7 +98,8 @@ SOURCES += \
     src/filefn/filetreewalk.cpp \
     src/img/rw/rimg_tiff_r.cpp \
     src/img/rw/rimg_tiff_w.cpp \
-    src/img/rw/rimg_tiff_r_decode.cpp
+    src/img/rw/rimg_tiff_r_decode.cpp \
+    src/m.cpp
 
 HEADERS += \
     src/filefn/t_filename.h \
@@ -156,9 +156,6 @@ HEADERS += \
     src/minit/t_2D_Matrix.h \
     src/minit/boost_cstdint.h \
     src/boost/boost_cstdint.h \
-    src/hide/h_result.h \
-    src/hide/h_e_mode.h \
-    src/hide/h_raw_data_hide.h \
     src/htime/timer.h \
     src/img/rw/rimg_resolve_image_type.h \
     src/log/tLog_Category_rimg.h \
@@ -193,7 +190,6 @@ INCLUDEPATH += $$PWD/src/ftw
 INCLUDEPATH += $$PWD/src/filefn
 INCLUDEPATH += $$PWD/src/hfile
 INCLUDEPATH += $$PWD/src/htime
-INCLUDEPATH += $$PWD/src/hide
 INCLUDEPATH += $$PWD/src/hstring
 INCLUDEPATH += $$PWD/src/txtrw
 INCLUDEPATH += $$PWD/src/binrw

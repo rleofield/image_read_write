@@ -324,8 +324,6 @@ int main() {
 
    try {
       //demo_rgb();
-      //demo_hide();
-      //demo_hide_single();
       do_demo_planar_rgb();
    } catch( runtime_error rte ) {
       string msg = rte.what();
