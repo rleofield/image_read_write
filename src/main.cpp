@@ -123,172 +123,172 @@ namespace {
 
 
    }
-//   void demo_hide_single() {
-//      tImgPlanar  img_source_vickers;
-//      tImgPlanar  img_nothing_vickers;
+   //   void demo_hide_single() {
+   //      tImgPlanar  img_source_vickers;
+   //      tImgPlanar  img_nothing_vickers;
 
-//      string path = "C:\\Projekte\\Zwick\\Bilder\\Bilder_2012_Messlinien_speichern\\test\\";
-//      path = "/home/richard/Desktop/sn/win/Bilder/Bilder_2012_Messlinien_speichern/test/";
-//      string vickers_source_path = path + "vickers_source.png";
-//      string vickers_changed_path = path + "vickers_target.png";
-//      string vickers_nothing_path = path + "abc.png";
+   //      string path = "C:\\Projekte\\Zwick\\Bilder\\Bilder_2012_Messlinien_speichern\\test\\";
+   //      path = "/home/richard/Desktop/sn/win/Bilder/Bilder_2012_Messlinien_speichern/test/";
+   //      string vickers_source_path = path + "vickers_source.png";
+   //      string vickers_changed_path = path + "vickers_target.png";
+   //      string vickers_nothing_path = path + "abc.png";
 
-//      cout << "source: " << vickers_source_path << endl;
-//      cout << "target: " << vickers_changed_path << endl;
-//      cout << "target: " << vickers_nothing_path << endl;
+   //      cout << "source: " << vickers_source_path << endl;
+   //      cout << "target: " << vickers_changed_path << endl;
+   //      cout << "target: " << vickers_nothing_path << endl;
 
-//      //rlf_hide::tResult sp = rlf_hide::result;
-
-
-//      read( vickers_source_path, img_source_vickers );
-//      read( vickers_nothing_path, img_nothing_vickers );
-
-//      img_source_vickers.name = vickers_source_path;
-//      img_nothing_vickers.name = vickers_nothing_path;
-//      LOGT_INFO( "LoadSetpoints" );
-
-//      vector<uint8_t> v_nothing;
-//      // no setpoints
-//      rlf_hide::eHiddenData ret1 = rlf_hide::read_hidden_data( img_nothing_vickers, v_nothing );
-//      rlf_hide::tResult sp_nothing = rlf_hide::result;
-
-//      // has setpoints
-//      vector<uint8_t> v_source;
-//      rlf_hide::eHiddenData ret2 = rlf_hide::read_hidden_data( img_source_vickers, v_source );
-//      rlf_hide::tResult sp_source = rlf_hide::result;
-
-//      // {D1=299.79434204101562 X1=287.22665405273437 Y1=110.06495666503906 ...}
-//      // {D1=299.79434204101562 X1=287.22665405273437 Y1=110.06495666503906 ...}
-
-//      // save to image with no setpoints
-
-//      rlf_hide::eHiddenData ret_save = rlf_hide::write_hidden_info( img_nothing_vickers, v_source );
-//      // write to disk
-//      write( vickers_changed_path, img_nothing_vickers, true );
-
-//      ret1 = rlf_hide::read_hidden_data( img_nothing_vickers, v_source );
-//      rlf_hide::tResult sp_source2 = rlf_hide::result;
+   //      //rlf_hide::tResult sp = rlf_hide::result;
 
 
-//      //rlf_hide::HiddenData1_Return ret2 = rlf_hide::LoadSetpoints( source, hd );
-//      //rlf_hide::SVHdnResult sp1 = rlf_hide::SetpointsMM;
-//      // {D1=299.79434204101562 X1=287.22665405273437 Y1=110.06495666503906 ...}
-//      if( !( sp_source2 == sp_source ) ) {
-//         ret1 = ret2;
-//      }
+   //      read( vickers_source_path, img_source_vickers );
+   //      read( vickers_nothing_path, img_nothing_vickers );
+
+   //      img_source_vickers.name = vickers_source_path;
+   //      img_nothing_vickers.name = vickers_nothing_path;
+   //      LOGT_INFO( "LoadSetpoints" );
+
+   //      vector<uint8_t> v_nothing;
+   //      // no setpoints
+   //      rlf_hide::eHiddenData ret1 = rlf_hide::read_hidden_data( img_nothing_vickers, v_nothing );
+   //      rlf_hide::tResult sp_nothing = rlf_hide::result;
+
+   //      // has setpoints
+   //      vector<uint8_t> v_source;
+   //      rlf_hide::eHiddenData ret2 = rlf_hide::read_hidden_data( img_source_vickers, v_source );
+   //      rlf_hide::tResult sp_source = rlf_hide::result;
+
+   //      // {D1=299.79434204101562 X1=287.22665405273437 Y1=110.06495666503906 ...}
+   //      // {D1=299.79434204101562 X1=287.22665405273437 Y1=110.06495666503906 ...}
+
+   //      // save to image with no setpoints
+
+   //      rlf_hide::eHiddenData ret_save = rlf_hide::write_hidden_info( img_nothing_vickers, v_source );
+   //      // write to disk
+   //      write( vickers_changed_path, img_nothing_vickers, true );
+
+   //      ret1 = rlf_hide::read_hidden_data( img_nothing_vickers, v_source );
+   //      rlf_hide::tResult sp_source2 = rlf_hide::result;
+
+
+   //      //rlf_hide::HiddenData1_Return ret2 = rlf_hide::LoadSetpoints( source, hd );
+   //      //rlf_hide::SVHdnResult sp1 = rlf_hide::SetpointsMM;
+   //      // {D1=299.79434204101562 X1=287.22665405273437 Y1=110.06495666503906 ...}
+   //      if( !( sp_source2 == sp_source ) ) {
+   //         ret1 = ret2;
+   //      }
 
 
 
-//   }
-//   void demo_hide() {
+   //   }
+   //   void demo_hide() {
 
-//      tImgPlanar  source;
-//      tImgPlanar  ctrl;
-//      tImgPlanar  write;
-//      tImgPlanar  target;
+   //      tImgPlanar  source;
+   //      tImgPlanar  ctrl;
+   //      tImgPlanar  write;
+   //      tImgPlanar  target;
 
-//      try {
+   //      try {
 
-//         rlf_hide::checksummap.clear();
+   //         rlf_hide::checksummap.clear();
 
-//         rlf_txtrw::t_text_read reader;
-//         std::list<std::string>  hasdata;
-//         std::list<std::string>  lines;
-//         reader.operator()( "allimages.txt", lines );
+   //         rlf_txtrw::t_text_read reader;
+   //         std::list<std::string>  hasdata;
+   //         std::list<std::string>  lines;
+   //         reader.operator()( "allimages.txt", lines );
 
-//         try {
-//for( auto s: lines ) {
-//               rlf_filefn::t_filename fn( s );
-//               string n = fn.base();
+   //         try {
+   //for( auto s: lines ) {
+   //               rlf_filefn::t_filename fn( s );
+   //               string n = fn.base();
 
-//               s = rlf_hstring::remove_quotes( s, '\"' );
+   //               s = rlf_hstring::remove_quotes( s, '\"' );
 
-//               if( rlf_hstring::first_char( s ) != '#' ) {
-//                  //                  LOGT_INFO( "Load: " + s );
-//                  //                  LOGT_INFO( s );
-//                  tTimer t;
-//                  read( s, source );
-//                  double d = t.millies();
+   //               if( rlf_hstring::first_char( s ) != '#' ) {
+   //                  //                  LOGT_INFO( "Load: " + s );
+   //                  //                  LOGT_INFO( s );
+   //                  tTimer t;
+   //                  read( s, source );
+   //                  double d = t.millies();
 
-//                  if( !source.is_rgb() ) {
-//                     if( source.is_mono8() ) {
-//                        rlf::rimg_rw::write( "aatest.BMP", source, true );
-//                        read( "aatest.BMP", ctrl );
-//                        //read( "aatest.BMP", write );
-//                        ctrl.name = s;
-//                        LOGT_INFO( "LoadSetpoints: " + s );
-//                        cout << s << endl;
-//                        vector<uint8_t> hd;
-//                        rlf_hide::eHiddenData ret0 = rlf_hide::read_hidden_data( ctrl, hd );
-//                        rlf_hide::tResult  sp2 = rlf_hide::result;
-//                        //rlf_hide::tResult  & sp2change = rlf_hide::result;
-//                        //sp2change.vickers.X1_left = 2.0;
-//                        //rlf_hide::eHiddenData ret2 = rlf_hide::write_hidden_info(write,hd);
-//                        //rlf_hide::eHiddenData ret3 = rlf_hide::read_hidden_data( write, hd );
-//                        //rlf_hide::tResult sp3 = rlf_hide::result;
-//                        //rlf_hide::tResult sp = rlf_hide::result;
+   //                  if( !source.is_rgb() ) {
+   //                     if( source.is_mono8() ) {
+   //                        rlf::rimg_rw::write( "aatest.BMP", source, true );
+   //                        read( "aatest.BMP", ctrl );
+   //                        //read( "aatest.BMP", write );
+   //                        ctrl.name = s;
+   //                        LOGT_INFO( "LoadSetpoints: " + s );
+   //                        cout << s << endl;
+   //                        vector<uint8_t> hd;
+   //                        rlf_hide::eHiddenData ret0 = rlf_hide::read_hidden_data( ctrl, hd );
+   //                        rlf_hide::tResult  sp2 = rlf_hide::result;
+   //                        //rlf_hide::tResult  & sp2change = rlf_hide::result;
+   //                        //sp2change.vickers.X1_left = 2.0;
+   //                        //rlf_hide::eHiddenData ret2 = rlf_hide::write_hidden_info(write,hd);
+   //                        //rlf_hide::eHiddenData ret3 = rlf_hide::read_hidden_data( write, hd );
+   //                        //rlf_hide::tResult sp3 = rlf_hide::result;
+   //                        //rlf_hide::tResult sp = rlf_hide::result;
 
-//                        if( ret0 == rlf_hide::eHiddenData::OK ) {
-//                           hasdata.push_back( s );
-//                           rlf_txtrw::t_write_ascii writer;
-//                           writer.operator()( "hasdata_data.txt", hasdata, true );
-//                           writer.operator()( "all_Vickers_2011.txt", rlf_hide::all_Vickers_2011, true );
-//                           writer.operator()( "all_Vickers.txt", rlf_hide::all_Vickers, true );
-//                           writer.operator()( "all_Knoop.txt", rlf_hide::all_Knoop, true );
-//                           writer.operator()( "all_Brinell.txt", rlf_hide::all_Brinell, true );
-//                           writer.operator()( "all_Nix.txt", rlf_hide::all_Nix, true );
-//                           writer.operator()( "all_checksum_OK_Mode_wrong.txt", rlf_hide::all_checksum_OK_Mode_wrong, true );
-
-
-//                        } else {
-//                           rlf_txtrw::t_write_ascii writer;
-//                           writer.operator()( "all_Vickers_2011.txt", rlf_hide::all_Vickers_2011, true );
-//                           writer.operator()( "all_Vickers.txt", rlf_hide::all_Vickers, true );
-//                           writer.operator()( "all_Knoop.txt", rlf_hide::all_Knoop, true );
-//                           writer.operator()( "all_Brinell.txt", rlf_hide::all_Brinell, true );
-//                           writer.operator()( "all_Nix.txt", rlf_hide::all_Nix, true );
-//                           writer.operator()( "all_checksum_OK_Mode_wrong.txt", rlf_hide::all_checksum_OK_Mode_wrong, true );
-
-//                           LOGT_INFO( "No Data:       " + s );
-//                        }
-//                     }
-//                  } else {
-//                     LOGT_INFO( "is rgb:        " + s );
-//                  }
-//               }
-//            }
-//         } catch( exception& ex ) {
-//            string msg = ex.what();
-//            LOGT_INFO( "Error: " + msg );
-//            return;
-
-//         }
-
-//         rlf_txtrw::t_write_ascii writer;
-//         writer.operator()( "all_Vickers_2011.txt", rlf_hide::all_Vickers_2011, true );
-//         writer.operator()( "all_Vickers.txt", rlf_hide::all_Vickers, true );
-//         writer.operator()( "all_Knoop.txt", rlf_hide::all_Knoop, true );
-//         writer.operator()( "all_Brinell.txt", rlf_hide::all_Brinell, true );
-//         writer.operator()( "all_Nix.txt", rlf_hide::all_Nix, true );
-//         writer.operator()( "all_checksum_OK_Mode_wrong.txt", rlf_hide::all_checksum_OK_Mode_wrong, true );
-//         LOGT_INFO( "ready" );
-//         size_t msize = rlf_hide::checksummap.size();
-
-//for( auto c: rlf_hide::checksummap ) {
-//            std::pair<uint32_t, uint32_t> p = c;
-//            uint32_t v = p.second;
-//            string vs = rlf_hstring::to_hex_0x( v );
-//            //LOGT_INFO( "CS: " + vs );
-//         }
-//      } catch( runtime_error rte ) {
-//         string msg = rte.what();
-//         string id = typeid( rte ).name();
-//         cout << "Ex: " + msg << endl;
-//         exit( 0 );
-//      }
+   //                        if( ret0 == rlf_hide::eHiddenData::OK ) {
+   //                           hasdata.push_back( s );
+   //                           rlf_txtrw::t_write_ascii writer;
+   //                           writer.operator()( "hasdata_data.txt", hasdata, true );
+   //                           writer.operator()( "all_Vickers_2011.txt", rlf_hide::all_Vickers_2011, true );
+   //                           writer.operator()( "all_Vickers.txt", rlf_hide::all_Vickers, true );
+   //                           writer.operator()( "all_Knoop.txt", rlf_hide::all_Knoop, true );
+   //                           writer.operator()( "all_Brinell.txt", rlf_hide::all_Brinell, true );
+   //                           writer.operator()( "all_Nix.txt", rlf_hide::all_Nix, true );
+   //                           writer.operator()( "all_checksum_OK_Mode_wrong.txt", rlf_hide::all_checksum_OK_Mode_wrong, true );
 
 
-//   }
+   //                        } else {
+   //                           rlf_txtrw::t_write_ascii writer;
+   //                           writer.operator()( "all_Vickers_2011.txt", rlf_hide::all_Vickers_2011, true );
+   //                           writer.operator()( "all_Vickers.txt", rlf_hide::all_Vickers, true );
+   //                           writer.operator()( "all_Knoop.txt", rlf_hide::all_Knoop, true );
+   //                           writer.operator()( "all_Brinell.txt", rlf_hide::all_Brinell, true );
+   //                           writer.operator()( "all_Nix.txt", rlf_hide::all_Nix, true );
+   //                           writer.operator()( "all_checksum_OK_Mode_wrong.txt", rlf_hide::all_checksum_OK_Mode_wrong, true );
+
+   //                           LOGT_INFO( "No Data:       " + s );
+   //                        }
+   //                     }
+   //                  } else {
+   //                     LOGT_INFO( "is rgb:        " + s );
+   //                  }
+   //               }
+   //            }
+   //         } catch( exception& ex ) {
+   //            string msg = ex.what();
+   //            LOGT_INFO( "Error: " + msg );
+   //            return;
+
+   //         }
+
+   //         rlf_txtrw::t_write_ascii writer;
+   //         writer.operator()( "all_Vickers_2011.txt", rlf_hide::all_Vickers_2011, true );
+   //         writer.operator()( "all_Vickers.txt", rlf_hide::all_Vickers, true );
+   //         writer.operator()( "all_Knoop.txt", rlf_hide::all_Knoop, true );
+   //         writer.operator()( "all_Brinell.txt", rlf_hide::all_Brinell, true );
+   //         writer.operator()( "all_Nix.txt", rlf_hide::all_Nix, true );
+   //         writer.operator()( "all_checksum_OK_Mode_wrong.txt", rlf_hide::all_checksum_OK_Mode_wrong, true );
+   //         LOGT_INFO( "ready" );
+   //         size_t msize = rlf_hide::checksummap.size();
+
+   //for( auto c: rlf_hide::checksummap ) {
+   //            std::pair<uint32_t, uint32_t> p = c;
+   //            uint32_t v = p.second;
+   //            string vs = rlf_hstring::to_hex_0x( v );
+   //            //LOGT_INFO( "CS: " + vs );
+   //         }
+   //      } catch( runtime_error rte ) {
+   //         string msg = rte.what();
+   //         string id = typeid( rte ).name();
+   //         cout << "Ex: " + msg << endl;
+   //         exit( 0 );
+   //      }
+
+
+   //   }
 
 
 
@@ -305,66 +305,66 @@ namespace {
       try {
 
          tTimer timer;
-         read( "0b.jpeg", source);
-         write("0b_pngtest.jpeg", source, true, jpeg_compression::JPEG_QUALITY_DEFAULT);
+         read( "0b.jpeg", source );
+         write( "0b_pngtest.jpeg", source, true, jpeg_compression::JPEG_QUALITY_DEFAULT );
 
 
 
          LOGT_INFO( "ready" );
 
          vector<string> files = {
-             "Salomon.tif",
+            "Salomon.tif",
 
-//             "0b.tif",
-//             "0b_gray.tif",
-//             "0b_pal.tif",
-//             "4.1.05.tiff",
-//             "4.2.03.tiff",
-//             "5.1.09.tiff",
-//             "136jk081.tif",
-//             "a16.tif",
-//             "a_image.tif",
-//             "DeltaE_8bit_gamma2.2.tif",
-//             "lena512color.tiff",
-//             "lena_std.tif",
-//             "numbers.512.tiff",
-//             "ruler.512.tiff",
-//            "testpat.1k.tiff",
-//            "testsobel.tif",
-//            "texmos1.p512.tiff",
-//            "texmos3.s512.tiff",
-//            "wash-ir.tiff",
-//            "wf.tif",
-//            "wf_out.tif",
+            //             "0b.tif",
+            //             "0b_gray.tif",
+            //             "0b_pal.tif",
+            //             "4.1.05.tiff",
+            //             "4.2.03.tiff",
+            //             "5.1.09.tiff",
+            //             "136jk081.tif",
+            //             "a16.tif",
+            //             "a_image.tif",
+            //             "DeltaE_8bit_gamma2.2.tif",
+            //             "lena512color.tiff",
+            //             "lena_std.tif",
+            //             "numbers.512.tiff",
+            //             "ruler.512.tiff",
+            //            "testpat.1k.tiff",
+            //            "testsobel.tif",
+            //            "texmos1.p512.tiff",
+            //            "texmos3.s512.tiff",
+            //            "wash-ir.tiff",
+            //            "wf.tif",
+            //            "wf_out.tif",
 
 
-              "12_16_bit.tif"
+            "12_16_bit.tif"
 
          };
 
-         for( string im:files){
-             string tmp = im;
+         for( string im : files ) {
+            string tmp = im;
             string d = "tst/";
             string da = "tst/a/";
             im = d + im;
             tTimer a;
-            LOGT_INFO(im);
+            LOGT_INFO( im );
             cout << im << endl;
-            t_filename fn(im);
+            t_filename fn( im );
 
-            LOGT_INFO("read : "+ fn.fullname());
+            LOGT_INFO( "read : " + fn.fullname() );
             read( fn.fullname(), source );
             string sec = to_string( a.seconds() );
-            LOGT_INFO(sec);
+            LOGT_INFO( sec );
             cout << sec << endl;
             tTimer b;
             string o = da + "00a_" + tmp + ".tif";
             rlf::rimg_rw::write( o, source, true );
             cout << o << endl;
             sec = to_string( b.seconds() );
-            LOGT_INFO(sec);
+            LOGT_INFO( sec );
             cout <<  sec << endl;
-            LOGT_INFO("write: "+ o);
+            LOGT_INFO( "write: " + o );
             cout << endl;
          }
 
@@ -466,12 +466,14 @@ int main() {
 
    uint64_t size_ = UINTMAX_MAX;
    uint64_t size_1 = -1;
-if( size_ < 100 ){
-   cout << endl;
-}
-if( size_1 < 100 ){
-   cout << endl;
-}
+
+   if( size_ < 100 ) {
+      cout << endl;
+   }
+
+   if( size_1 < 100 ) {
+      cout << endl;
+   }
 
 
    rlf_tlog::logger().setLogfile( "hidden" );

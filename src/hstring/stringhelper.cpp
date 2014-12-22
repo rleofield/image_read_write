@@ -35,8 +35,17 @@ namespace rlf_hstring {
 
    namespace nsloc {
 
+#ifdef _WIN32
+      char const* const de = "German";
+#else
       const char* const de = "de_DE.utf8";
+#endif
+
+#ifdef _WIN32
+      char const* const ch = "German_Switzerland";
+#else
       const char* const ch = "de_CH.utf8";
+#endif
 
    }
    string getDE() {
@@ -66,8 +75,8 @@ namespace rlf_hstring {
       l.assign( v.begin(), v.end() );
    }
 
-   void string_to_vector( string const& s, vector<string>& v ) {
-      vector<string> const& r = rlf_hstring::split( s, "\n" );
+   void string_to_vector( string const& s, vector<string>& v, char trim_ch ) {
+      vector<string> const& r = rlf_hstring::split( s, "\n", trim_ch );
       v.insert( v.end(), r.begin(), r.end() );
    }
 
@@ -182,6 +191,10 @@ namespace rlf_hstring {
          return "";
       }
 
+      if( ch == 0 ) {
+         return str;
+      }
+
       string::const_iterator begin = str.begin();
 
       while( begin < str.end() && *begin == ch ) {
@@ -201,7 +214,7 @@ namespace rlf_hstring {
       size_t start = begin - str.begin();
       size_t n = last.base() - begin;
       string temp = str.substr( start, n );
-      return temp;
+      return move( temp );
    }
 
    string trim_right( string const& str, char ch ) {
@@ -456,31 +469,13 @@ namespace rlf_hstring {
       return for_each( v.begin(), v.end(), add( sep ) ).s;
    }
 
-   /*  vector<string> tokenize( string const& str, const string& delimiters ) {
-   string::size_type pos_not_delimiter = str.find_first_not_of( delimiters, 0 );
-   string::size_type pos_delimiter     = str.find_first_of( delimiters, pos_not_delimiter );
-   vector<string> tokens;
 
-   while( string::npos != pos_delimiter || string::npos != pos_not_delimiter ) {
-   string::size_type length = pos_delimiter - pos_not_delimiter;
-   string t = str.substr( pos_not_delimiter, length );
-   t = trim(t,' ');
-   tokens.push_back( t );
-   pos_not_delimiter = str.find_first_not_of( delimiters, pos_delimiter );
-   pos_delimiter = str.find_first_of( delimiters, pos_not_delimiter );
+   vector<string> split( string const& l, string const& delimiters, char trim_ch ) {
+      return tTokens( l, delimiters, trim_ch )();
    }
-
-   return tokens;
-   }
-   */
-
-   vector<string> split( string const& l, string const& delimiters ) {
-      return tTokens( l, delimiters )();
-   }
-   vector<string> split( string const& l, char delim ) {
-      string d;
-      d += delim;
-      return split( l, d );
+   vector<string> split( string const& l, char delim, char trim_ch ) {
+      string d( 1, delim );
+      return split( l, d, trim_ch );
    }
 
 

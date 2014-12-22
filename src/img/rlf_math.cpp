@@ -28,13 +28,22 @@
 #include <limits.h>
 #include <assert.h>
 
+//#include "rimg_imgsize_type.h"
+
+//#include "rimg_xy_types.h"
 #include "rlf_math.h"
+#ifdef _WIN32
+#pragma warning( disable:4267) // possible loss of data ( size_t nach int )
+#endif
 
 using namespace std;
 
 
 namespace rlf {
    namespace math {
+
+
+
 
       double Gauss( double stddev, double x ) {
          double gauss = ::exp( -0.5 * ( x * x ) / ( stddev * stddev ) ) / sqrt( 2 * PI );
@@ -458,7 +467,7 @@ namespace rlf {
                   *p2 = tmp;
                }
       }
-      void    shell_sort( vector<size_t> &base, size_t n ) {
+      void    shell_sort( vector<size_t>& base, size_t n ) {
          int i, j;
          int gap, tmp ;
          int nn = n;
@@ -630,8 +639,8 @@ namespace rlf {
          }
       }
 
-      void linear_zoom( const vector<uint8_t> &s,
-                        vector<uint8_t>  &t ) {
+      void linear_zoom( const vector<uint8_t>& s,
+                        vector<uint8_t>&  t ) {
 
          double ds = 1.0 / s.size();
          double dt = 1.0 / t.size();

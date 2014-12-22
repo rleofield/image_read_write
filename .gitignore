@@ -12,15 +12,7 @@
 /0b.jpg
 /0b_test.bmp
 /12_16_bit.tif
-/Kopie.bmp
-/Kopie_test.bmp
 /a.bmp
-/a16.tif
-/a16bw.tif
-/eco4050CTLGEC_15449_7 (copy).bmp
-/eco4050CTLGEC_15449_7_gray.bmp
-/eco4050CTLGEC_15449_7_test.bmp
-/eco4050CTLGEC_17014_1_clean_dots.bmp
 /gauss3.bmp
 /large.bmp
 /wf_neu.tif
@@ -30,11 +22,8 @@
 a.tif
 image_read_write
 image_read_write_withlib
-
 /bin/
 /*.bmp.tar.bz2
-/img_rw.vcxproj
-/img_rw.vcxproj.filters
 /*.bak
 /*.tag
 /*.pro.user
@@ -55,6 +44,5 @@ image_read_write_withlib
 /testpat.1k.tiff
 /tiff2raw.c
 /tiff6.pdf
-/wash-ir.tiff
 /jk.txt
 /tst/

@@ -56,8 +56,8 @@ namespace rlf {
          p is a binary image ( pixel != 0 is object )
          p is bit 8
    */
-	 uint32_t CellAreaFilter(tImgPlanar& p, size_t min, size_t max, uint8_t color,
-                       size_t max_size_to_remove );
+   uint32_t CellAreaFilter( tImgPlanar& p, size_t min, size_t max, uint8_t color,
+                            size_t max_size_to_remove );
 
 
 

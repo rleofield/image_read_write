@@ -192,13 +192,15 @@ namespace rlf {
          try {
             bin_data::tWriteBin()( fn, jpeg_buffer_raw, outbuffer_size );
          } catch( bin_data::tBinWriteEx& ) {
-            if(jpeg_buffer_raw != nullptr ){
+            if( jpeg_buffer_raw != nullptr ) {
                delete [] jpeg_buffer_raw;
                jpeg_buffer_raw = nullptr;
             }
+
             throw; //img_ex::t_ImgWriteEx( error_messages::bmp::write_file( path ) );
          }
-         if(jpeg_buffer_raw != nullptr ){
+
+         if( jpeg_buffer_raw != nullptr ) {
             delete [] jpeg_buffer_raw;
             jpeg_buffer_raw = nullptr;
          }
@@ -323,7 +325,7 @@ namespace rlf {
    }
 
 
-   void t_read_jpeg::read( tImgLinear& img ){
+   void t_read_jpeg::read( tImgLinear& img ) {
 
 
       try {
@@ -337,7 +339,7 @@ namespace rlf {
    void t_read_jpeg::read( tImgPlanar& planar )  {
 
       tImgLinear img_read;
-      read(  img_read );
+      read( img_read );
       tImgViewLinear vlin( img_read );
       convert( vlin, planar );
    }
