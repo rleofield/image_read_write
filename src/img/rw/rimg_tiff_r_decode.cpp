@@ -49,9 +49,6 @@ Lib: librimgrw
 
 #include "rimg_tiff.h"
 
-#ifdef _WIN32
-#pragma warning( disable:4996 4100) // _CRT_SECURE_NO_WARNINGS
-#endif
 using namespace std;
 using std::vector;
 
@@ -558,7 +555,8 @@ namespace rlf {
       }
 
       // last entry, offset of next IFD
-      uint32_t offset_to_next_IFD = *( uint32_t* )p;
+      uint32_t* p32 = const_cast< uint32_t*> ( reinterpret_cast< uint32_t const* >(p) );
+      uint32_t offset_to_next_IFD = *p32;
       assert( data.strip_byte_counts.size() == data.strip_offsets.size() );
 
       if( data.rows_per_strip <= 0  && data.strip_offsets.size() == 1 ) {

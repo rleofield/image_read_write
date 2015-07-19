@@ -313,7 +313,8 @@ namespace rlf {
          }
 
 
-         uint16_array_swap( ( uint16_t* )( &b[ifd_entry.offset_or_value] ), ifd_entry.count );
+         uint16_t *p16 = const_cast<uint16_t*>(  reinterpret_cast<uint16_t const*>   ( &b[ifd_entry.offset_or_value] ) );
+         uint16_array_swap( const_cast<uint16_t*>(   reinterpret_cast<uint16_t const*> (  ( &b[ifd_entry.offset_or_value] ) ) ), ifd_entry.count ) ;
 
          return;
       }
@@ -325,7 +326,7 @@ namespace rlf {
             return;
          }
 
-         uint32_array_swap( ( uint32_t* )( &b[ifd_entry.offset_or_value] ), ifd_entry.count );
+         uint32_array_swap( const_cast<uint32_t*> (  reinterpret_cast<uint32_t const*>  ( ( &b[ifd_entry.offset_or_value] ) ) ), ifd_entry.count );
 
          return;
       }
@@ -333,7 +334,7 @@ namespace rlf {
 
       if( ifd_entry.field_type == field_type::rational ) {
 
-         uint32_array_swap( ( uint32_t* )( &b[ifd_entry.offset_or_value] ), 2 );
+         uint32_array_swap( const_cast< uint32_t* > (  reinterpret_cast<uint32_t const*>  ( &b[ifd_entry.offset_or_value] ) ), 2  );
       }
    }
 

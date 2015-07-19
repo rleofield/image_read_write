@@ -64,7 +64,7 @@ QMAKE_CXXFLAGS_RELEASE -= -Wwrite-strings
 QMAKE_CXXFLAGS_RELEASE += -Wno-unused-variable
 QMAKE_CXXFLAGS_RELEASE += -Wno-unused-but-set-variable
 QMAKE_CXXFLAGS_RELEASE += -msse
-#QMAKE_CXXFLAGS_RELEASE += -Weffc++
+QMAKE_CXXFLAGS_RELEASE += -Weffc++
 
 
 message("qmake image_read_write")
@@ -118,8 +118,7 @@ SOURCES += \
     src/filefn/filetreewalk.cpp \
     src/img/rw/rimg_tiff_r.cpp \
     src/img/rw/rimg_tiff_w.cpp \
-    src/img/rw/rimg_tiff_r_decode.cpp \
-    src/main.cpp
+    src/img/rw/rimg_tiff_r_decode.cpp
 
 HEADERS += \
     src/filefn/t_filename.h \

@@ -53,9 +53,6 @@ Lib: librimgrw
 
 #include "rimg_tiff.h"
 
-#ifdef _WIN32
-#pragma warning( disable:4996 4100) // _CRT_SECURE_NO_WARNINGS
-#endif
 using namespace std;
 using std::vector;
 using namespace rlf::rimg_convert;
