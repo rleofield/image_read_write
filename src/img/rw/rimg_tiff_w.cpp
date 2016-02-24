@@ -78,7 +78,9 @@ namespace rlf {
 
 
    namespace {
+
       const string marker = "%s";
+#ifdef USE_THIS
       string replace( string const& msg, string const& s0 ) {
          string temp = msg;
 
@@ -93,12 +95,14 @@ namespace rlf {
 
          return temp;
       }
+#endif
 
+#ifdef USE_THIS
       const string msg_write_file = "Couldn't write file: '%s'";
       string write_file( string const& s0 ) {
          return replace( msg_write_file, s0 );
       }
-
+#endif
 
 
    }
@@ -253,7 +257,7 @@ namespace rlf {
       color_map_offset  = data_size;
 
       if( data.photometric_interpr == phi::PALETTE ) { // 3
-         data_size  += colormap_size * sizeof( uint16_t );
+         data_size  += static_cast<uint32_t>(colormap_size * sizeof( uint16_t ));
       }
 
       data_size = tiff_align32( data_size );
@@ -331,15 +335,15 @@ namespace rlf {
          uint8_t* data1 = ( ptrbuf + bits_per_sample_offset );
          entry.ifd_entry.count = 3    ;
          entry.ifd_entry.offset_or_value = bits_per_sample_offset;
-         set_uint16_at( data1, ( uint16_t )data.bits_red );
+         set_uint16_at( data1, static_cast< uint16_t> (data.bits_red) );
          data1 += 2;
-         set_uint16_at( data1, ( uint16_t )data.bits_green );
+         set_uint16_at( data1, static_cast< uint16_t> (data.bits_green ) );
          data1 += 2;
-         set_uint16_at( data1, ( uint16_t )data.bits_blue );
+         set_uint16_at( data1, static_cast< uint16_t> (data.bits_blue ) );
          data1 += 2;
       } else {
          entry.ifd_entry.count = 1    ;
-         entry.ifd_entry.offset_or_value = ( uint32_t )data.bits_gray & 0xffff;
+         entry.ifd_entry.offset_or_value = static_cast< uint32_t> (data.bits_gray) & 0xffff;
       }
 
       entry.ToBuffer( dir_ptr );
@@ -352,7 +356,7 @@ namespace rlf {
       entry.ifd_entry.tag    = tags::compression;
       entry.ifd_entry.field_type   = field_type::short_;
       entry.ifd_entry.count = 1    ;
-      entry.ifd_entry.offset_or_value = ( uint32_t )data.compression & UINT16_MAX;
+      entry.ifd_entry.offset_or_value =static_cast< uint32_t> (data.compression) & UINT16_MAX;
       entry.ToBuffer( dir_ptr );
       dir_ptr += Size::DIR_ENTRY;
       dir_count++;
@@ -362,7 +366,7 @@ namespace rlf {
       entry.ifd_entry.tag    = tags::photometric_interpretation;
       entry.ifd_entry.field_type   = field_type::short_;
       entry.ifd_entry.count = 1    ;
-      entry.ifd_entry.offset_or_value = ( uint32_t )data.photometric_interpr & UINT16_MAX;
+      entry.ifd_entry.offset_or_value =static_cast< uint32_t> (data.photometric_interpr) & UINT16_MAX;
       entry.ToBuffer( dir_ptr );
       dir_ptr += Size::DIR_ENTRY;
       dir_count++;
@@ -375,13 +379,13 @@ namespace rlf {
       uint32_t descriptionlength = static_cast<uint32_t>( data.description.length() + 1 );
 
       if( descriptionlength > 4 ) {
-         strcpy( ( char* )( ptrbuf + string_offset ), data.description.c_str() );
+         strcpy( reinterpret_cast<char*>( ptrbuf + string_offset ), data.description.c_str() );
          entry.ifd_entry.count = descriptionlength;
          entry.ifd_entry.offset_or_value = string_offset;
          string_offset += descriptionlength;
       } else {
          entry.ifd_entry.count = descriptionlength;
-         strcpy( ( char* )( &( entry.ifd_entry.offset_or_value ) ), data.description.c_str() );
+         strcpy( reinterpret_cast<char*>( &( entry.ifd_entry.offset_or_value ) ), data.description.c_str() );
       }
 
       entry.ToBuffer( dir_ptr );
@@ -452,7 +456,7 @@ namespace rlf {
          entry.ifd_entry.field_type   = field_type::short_;
          entry.ifd_entry.count = 1    ;
          entry.ifd_entry.offset_or_value =
-            ( unsigned long )data.planar_configuration & UINT16_MAX;
+            static_cast< unsigned long >(data.planar_configuration) & UINT16_MAX;
          entry.ToBuffer( dir_ptr );
          dir_ptr += Size::DIR_ENTRY;
          dir_count++;
@@ -482,7 +486,7 @@ namespace rlf {
       /* -- copy the colormap
         */
       if( data.photometric_interpr == phi::PALETTE ) { // 3
-         uint16_t* plut = ( uint16_t* )( ptrbuf + color_map_offset );
+         uint16_t* plut = reinterpret_cast<uint16_t*> ( ptrbuf + color_map_offset );
          size_t count = 0;
          size_t nr = number_of_colors;
 
@@ -491,13 +495,13 @@ namespace rlf {
          for( count = 0; count < nr; count++ ) {
             uint16_t temp = 0;
             temp = v[ count ].r();
-            temp = ( temp << 8 );
+            temp = static_cast<uint16_t>( temp << 8 );
             *( plut + 0 * nr + count )  = temp;
             temp = v[ count ].g();
-            temp = ( temp << 8 );
+            temp = static_cast<uint16_t>( temp << 8 );
             *( plut + 1 * nr + count )  = temp;
             temp = v[ count ].b();
-            temp = ( temp << 8 );
+            temp = static_cast<uint16_t>( temp << 8 );
             *( plut + 2 * nr + count )  = temp;
          }
       }
@@ -523,8 +527,9 @@ namespace rlf {
          uint8_t* ptr = ptrbuf + img_offset;
 
          for( size_t iy = 0; iy < im.size().y(); iy++ ) {
-            tRGB const* source = ( tRGB const* )( im.row_ptr( iy ) );
-            tRGB* target = ( tRGB* )ptr;
+            // nnn
+            tRGB const* source = reinterpret_cast< tRGB const*>( im.row_ptr( iy ) );
+            tRGB* target = reinterpret_cast< tRGB* >(ptr);
 
             size_t count = im.size().x();
             size_t index = 0;

@@ -114,7 +114,7 @@ namespace rlf {
       uint16_t t_type   = e.ifd_entry.field_type;
       uint32_t t_count   = e.ifd_entry.count;
       uint32_t offset_or_value   = e.ifd_entry.offset_or_value;
-      uint16_t const* uint16Ptr = ( uint16_t const* ) & ( e.ifd_entry.offset_or_value );
+      uint16_t const* uint16Ptr = reinterpret_cast<uint16_t const*> ( & ( e.ifd_entry.offset_or_value ) );
       uint16_t short_array[2];
       short_array[0] = *uint16Ptr;
       uint16Ptr++;
@@ -165,7 +165,7 @@ namespace rlf {
               */
       if( t_tag == tags::image_width ) {
          if( t_type == field_type::short_ ) {
-            data.sx( ( uint32_t )short_array[0] );
+            data.sx( static_cast< uint32_t > (short_array[0] ) );
             return true;
          }
 
@@ -271,15 +271,15 @@ namespace rlf {
               */
       if( t_tag == tags::description ) { /* 270 */
          if( t_type == field_type::ascii ) {
-            char const* p = nullptr;
+            uint8_t const* p = nullptr;
 
             if( t_count > 4 ) {
-               p = ( char const* )ptr_at( offset_or_value );
+               p = const_ptr_at( offset_or_value );
             } else {
-               p = ( char const* )&offset_or_value;
+               p = reinterpret_cast< uint8_t const*> (&offset_or_value);
             }
 
-            data.description = string( p, t_count );
+            data.description = string( reinterpret_cast<char const*>( p), t_count );
 
             return true;
          }
@@ -291,15 +291,15 @@ namespace rlf {
               */
       if( t_tag == tags::document_name ) { /* 270 */
          if( t_type == field_type::ascii ) {
-            char const* p = nullptr;
+            uint8_t const* p = nullptr;
 
             if( t_count > 4 ) {
-               p = ( char const* )ptr_at( offset_or_value );
+               p = const_ptr_at( offset_or_value );
             } else {
-               p = ( char const* )&offset_or_value;
+               p = reinterpret_cast< uint8_t const* >(&offset_or_value);
             }
 
-            data.document_name = string( p, t_count );
+            data.document_name = string( reinterpret_cast<char const*>(p), t_count );
 
             return true;
          }
@@ -470,9 +470,9 @@ namespace rlf {
                tRGBA a;
                a.a() = 255;
                ptrdiff_t df = &ic - &data.palette[0];
-               a.r() = map.r[ df ] >> 8 ;
-               a.g() = map.g[ df ] >> 8 ;
-               a.b() = map.b[ df ] >> 8 ;
+               a.r() = static_cast<uint8_t>(map.r[ df ] >> 8 );
+               a.g() = static_cast<uint8_t>(map.g[ df ] >> 8 );
+               a.b() = static_cast<uint8_t>(map.b[ df ] >> 8 );
                data.palette[ df ] = a;
             }
 

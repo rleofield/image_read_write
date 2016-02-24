@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
 */
-/*! \file rimg_rw_tiff.cpp
+/*! \file rimg_tiff_r.cpp
 \brief impl for read and write tif images
 
 Lib: librimgrw
@@ -81,36 +81,36 @@ namespace rlf {
       auto b0 = v8.begin();
 
       for( auto p : v16 ) {
-         *( b0++ ) = p >> shift;
+         *( b0++ ) = static_cast<uint8_t>(p >> shift);
       }
 
       return std::move( v8 );
    }
 
 
-   namespace {
-      const string marker = "%s";
-      string replace( string const& msg, string const& s0 ) {
-         string temp = msg;
+//   namespace {
+//      const string marker = "%s";
+//      string replace( string const& msg, string const& s0 ) {
+//         string temp = msg;
 
-         if( s0.size() > 0 ) {
-            size_t pos = msg.find( marker );
+//         if( s0.size() > 0 ) {
+//            size_t pos = msg.find( marker );
 
-            if( pos != string::npos ) {
-               temp.erase( pos, marker.size() );
-               temp.insert( pos, s0 );
-            }
-         }
+//            if( pos != string::npos ) {
+//               temp.erase( pos, marker.size() );
+//               temp.insert( pos, s0 );
+//            }
+//         }
 
-         return temp;
-      }
+//         return temp;
+//      }
 
-      const string msg_write_file = "Couldn't write file: '%s'";
-      string write_file( string const& s0 ) {
-         return replace( msg_write_file, s0 );
-      }
-      const string msg_image_format_not_supported  = "Image write failed";
-   }
+//      const string msg_write_file = "Couldn't write file: '%s'";
+//      string write_file( string const& s0 ) {
+//         return replace( msg_write_file, s0 );
+//      }
+//      const string msg_image_format_not_supported  = "Image write failed";
+//   }
 
    string type_to_string( uint16_t val ) {
 
@@ -208,6 +208,7 @@ namespace rlf {
       strip_byte_counts(),
       photometric_interpr( phi::GRAY_white_is_min ),
       description(),
+      document_name(),
       compression( 1 ),
       offset_colormap( 0 ),
       planar_configuration( 0 ),
@@ -217,6 +218,7 @@ namespace rlf {
       bits_blue( 0 ),
       bits_alpha( 0 ),
       samples( 1 ),
+      c_map(),
       palette( 0x100 ) {
    }
 
@@ -300,7 +302,7 @@ namespace rlf {
 
       if( ifd_entry.field_type == field_type::short_ ) {
 
-         uint16_t* entryPtr = ( uint16_t* )( &( ifd_entry.offset_or_value ) );
+         uint16_t* entryPtr = reinterpret_cast<uint16_t*> (  &( ifd_entry.offset_or_value )  );
 
          if( ifd_entry.count == 1 ) {
             *( entryPtr ) = uint16_swap( *( entryPtr ) );
@@ -308,10 +310,9 @@ namespace rlf {
          }
 
          if( ifd_entry.count == 2 ) {
-            uint16_array_swap( ( uint16_t* )( &( ifd_entry.offset_or_value ) ), 2 );
+            uint16_array_swap( reinterpret_cast<uint16_t*> ( &( ifd_entry.offset_or_value ) ), 2 );
             return;
          }
-
 
          uint16_t *p16 = const_cast<uint16_t*>(  reinterpret_cast<uint16_t const*>   ( &b[ifd_entry.offset_or_value] ) );
          uint16_array_swap( const_cast<uint16_t*>(   reinterpret_cast<uint16_t const*> (  ( &b[ifd_entry.offset_or_value] ) ) ), ifd_entry.count ) ;
@@ -375,7 +376,7 @@ namespace rlf {
 
          uint32_t shift = 4;  // for 12 bit images
          vector<uint8_t> v8 = to_v16_scale_to8( v16, shift );
-         im.insert_data( &v8[0], v8.size(), 0 );
+         im.insert_data( &v8[0], static_cast<uint32_t>(v8.size()), 0 );
 
          return;
       }
@@ -417,7 +418,7 @@ namespace rlf {
 
    void tTiff::check_II_MM()  {
 
-      int lLogo = II_IntelLogo.size();
+      int lLogo = static_cast<int>(II_IntelLogo.size());
       uint8_t const* p0 = ptr_at( 0 );
       uint8_t const* p1 = ptr_at( lLogo );
 
@@ -579,7 +580,7 @@ namespace rlf {
             for( uint32_t offset : data.strip_offsets ) {
                uint8_t const* p = ptr_at( offset );
                uint32_t bytes = data.strip_byte_counts[count++];
-               img.insert_data( p, bytes, offset_img );
+               img.insert_data( p, bytes, static_cast<uint32_t>(offset_img) );
                offset_img += bytes;
             }
          }
@@ -596,7 +597,7 @@ namespace rlf {
                vector<uint8_t> v( img.bytes() );
 
                uint8_t* vptr = &v[0];
-               tRGB* target = ( tRGB* )( vptr );
+               tRGB* target = reinterpret_cast< tRGB* >( vptr ) ;
 
                uint8_t const* red = ptr_at( data.strip_offsets[0] );
                uint8_t const* red_end = red + data.strip_byte_counts[0];
@@ -648,7 +649,7 @@ namespace rlf {
             if( data.strip_offsets.size() == 1 ) {
                uint32_t offset = data.strip_offsets[0];
                uint8_t* b8 = ptr_at( offset );
-               uint16_t* b16 = ( uint16_t* )( b8 );
+               uint16_t* b16 = reinterpret_cast< uint16_t*>( b8 );
                uint32_t bytes = data.strip_byte_counts[0];
 
                bytes >>= 1;
@@ -666,7 +667,7 @@ namespace rlf {
                for( size_t i = 0; i <  data.strip_offsets.size() ; i++ ) {
                   uint32_t offset = data.strip_offsets[i];
                   uint8_t*  p8 = ptr_at( offset );
-                  uint16_t* p16 = ( uint16_t* )( p8 );
+                  uint16_t* p16 = reinterpret_cast< uint16_t* >( p8 );
                   bytes = data.strip_byte_counts[i];
 
                   bytes >>= 1;
@@ -711,18 +712,18 @@ namespace rlf {
                } else {
                   uint16_t r, g, b;
                   memcpy( &r, p + 0, 2 );
-                  roffset = ( unsigned long )r;
+                  roffset = static_cast< unsigned long >(r);
                   memcpy( &g, p + 2 , 2 );
-                  goffset = ( unsigned long )g;
+                  goffset = static_cast< unsigned long >(g);
                   memcpy( &b, p + 4, 2 );
-                  boffset = ( unsigned long )b;
+                  boffset = static_cast< unsigned long >(b);
                }
 
                vector<uint8_t> v( img.bytes() );
                size_t pixels = data.pixels();
                size_t index = 0;
                uint8_t* vptr = &v[0];
-               tRGB* target = ( tRGB* )( vptr );
+               tRGB* target = reinterpret_cast< tRGB* >( vptr );
                uint8_t const* red = ptr_at( roffset );
                uint8_t const* green = ptr_at( goffset );
                uint8_t const* blue = ptr_at( boffset );
@@ -774,7 +775,10 @@ namespace rlf {
       img( im_ ),
       data(),
       buf( buf_ ),
-      _do_swap( false ) {}
+      _do_swap( false ),
+      tagloglines(),
+      errors()
+   {}
 
    tTiff::~tTiff() {
       // delete &t;

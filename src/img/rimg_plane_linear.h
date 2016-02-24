@@ -56,6 +56,7 @@ using rlf_minit::size_t_xy;
 namespace rlf {
 
 
+
    namespace rimg_planar {
 
       template<typename T>

@@ -163,7 +163,7 @@ namespace rlf {
          return false;
       }
       operator uint16_t()const {
-         return value;
+         return static_cast<uint16_t>( value );
       }
       string info;
       int32_t value;
@@ -318,7 +318,8 @@ namespace rlf {
    /* -- byte_t reverse WORD and uint32_t
    */
    inline uint16_t uint16_swap( uint16_t x ) {
-      return ( ( unsigned short int )( ( ( ( x ) >> 8 ) & 0xff ) | ( ( ( x ) & 0xff ) << 8 ) ) );
+      int temp = ( ( ( ( x ) >> 8 ) & 0xff ) | ( ( ( x ) & 0xff ) << 8 ) ) ;
+      return static_cast<uint16_t>(temp);
 
    }
    inline  uint32_t uint32_swap( uint32_t x ) {
@@ -344,7 +345,8 @@ namespace rlf {
    template<typename T>
    inline void inverse( T* pimg, size_t count ) {
       while( count-- ) {
-         *pimg = ( T )( T( -1 ) - *pimg );
+         auto temp = ( T( -1 ) - *pimg );
+         *pimg = static_cast<T> ( temp );
          pimg++;
       }
    }
@@ -352,7 +354,8 @@ namespace rlf {
    inline bool IsBigEndian() {
       int x = 1;
 
-      if( *( char* )&x == 1 ) {
+
+      if( *( reinterpret_cast<char*>(&x) ) == 1 ) {
          return false;
       }
 
@@ -465,6 +468,7 @@ namespace rlf {
    };
 
 
+   // impl in rimg_tiff_r.cpp
    class tTiff {
 
       // read
@@ -480,6 +484,7 @@ namespace rlf {
       int  data_to_image();
       tTiffData   data;
 
+      // external tiff buffer
       std::vector<uint8_t> const& buf;
 
 
@@ -502,7 +507,7 @@ namespace rlf {
             throw cTiffException( e, lfm_tif );
          }
 
-         return &buf[0] + offset;
+         return buf.data() + offset;
       }
       uint8_t* ptr_at( size_t offset ) {
          if( offset >= buf.size() ) {
@@ -510,8 +515,26 @@ namespace rlf {
             throw cTiffException( e, lfm_tif );
          }
 
-         uint8_t const* p =  &buf[0] + offset;
+         uint8_t const* p =  buf.data() + offset;
          return const_cast<uint8_t*>( p );
+      }
+      uint8_t const* const_ptr_at( size_t offset ) {
+         if( offset >= buf.size() ) {
+            string e = "offset in buf is out of range";
+            throw cTiffException( e, lfm_tif );
+         }
+
+         uint8_t const* p =  buf.data() + offset;
+         return p;
+      }
+      int8_t const* signed_const_ptr_at( size_t offset ) {
+         if( offset >= buf.size() ) {
+            string e = "offset in buf is out of range";
+            throw cTiffException( e, lfm_tif );
+         }
+
+         uint8_t const* p =  buf.data() + offset;
+         return reinterpret_cast<int8_t const*>( p);
       }
 
       uint16_t uint16_at( size_t off ) {

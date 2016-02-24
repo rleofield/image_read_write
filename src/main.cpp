@@ -89,8 +89,8 @@ namespace {
 
 
       rlf::rimg_raw::write_raw_data( "test.raw", tImgViewLinear( img1 ) );
-      size_t w = img1.size().w();
-      size_t h = img1.size().h();
+      uint32_t w = img1.size().w();
+      uint32_t h = img1.size().h();
       tImgLinear img_read_raw;
       rlf::rimg_raw::read_raw_data( "test.raw", w, h, img_read_raw );
 
@@ -477,7 +477,7 @@ int main() {
 
 
    rlf_tlog::logger().setLogfile( "hidden" );
-   rlf_tlog::logger().setLogLevel( rlf_tlog::eLevel::LDEBUG );
+   rlf_tlog::logger().log_level( rlf_tlog::eLevel::LDEBUG );
    LOGT_INFO( "start" );
    LOGT_INFO( "===================================" );
 
@@ -489,7 +489,7 @@ int main() {
 
 
    try {
-      //demo_rgb();
+      demo_rgb();
       //demo_hide();
       //demo_hide_single();
       do_demo_planar_rgb();

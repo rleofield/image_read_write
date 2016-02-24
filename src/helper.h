@@ -68,15 +68,6 @@ namespace helper_read_write_file {
    }
 
 
-
-   inline char* toCharPtr( std::vector<uint8_t>& b ) {
-      return reinterpret_cast<char* >( static_cast<uint8_t* >( &b[0] ) );
-   }
-   inline char const* toCharPtr( std::vector<uint8_t> const& b ) {
-      return reinterpret_cast<char const* >( static_cast<uint8_t const* >( &b[0] ) );
-   }
-
-
 }
 
 #endif // HELPER_H

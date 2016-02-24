@@ -62,7 +62,7 @@ namespace rlf {
       protected:
          string _fn;
       public:
-
+         t_reader():_fn(){}
          shared_ptr<t_read> create_reader( e_file_type t ) ;
          void read( string fn, tImgLinear& img );
          void read( string fn, tImgPlanar& img );

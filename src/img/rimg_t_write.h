@@ -63,8 +63,8 @@ namespace rlf {
 
       size_t _c;
    protected:
-      size_t c()const {
-         return _c;
+      int c()const {
+         return static_cast<int>(_c );
       }
    public:
       t_write( size_t c_ ): _c( c_ ) {}

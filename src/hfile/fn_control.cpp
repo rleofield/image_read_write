@@ -61,17 +61,17 @@ namespace rlf_hfile {
       }
 
       namespace {
-         bool compareByString( string const& i, string const& j ) {
-            return ( i < j );
-         }
+//         bool compareByString( string const& i, string const& j ) {
+//            return ( i < j );
+//         }
       }
 
 
 
       namespace {
-         bool compareByFullname( t_filename const& i, t_filename const& j ) {
-            return ( i.fullname() < j.fullname() );
-         }
+//         bool compareByFullname( t_filename const& i, t_filename const& j ) {
+//            return ( i.fullname() < j.fullname() );
+//         }
       }
 
       std::string correct_slash_at_end( std::string const& path ) {
