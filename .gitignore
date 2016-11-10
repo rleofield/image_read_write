@@ -61,3 +61,4 @@ image_read_write_withlib
 /aatest.BMP
 /0a_jpeg.BMP
 /0a_png.BMP
+*.qmake.stash
