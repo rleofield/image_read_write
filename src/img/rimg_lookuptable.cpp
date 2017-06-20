@@ -1015,8 +1015,7 @@ namespace rlf {
                lines.push_back( s );
             }
 
-            rlf_txtrw::t_write_ascii_list w;
-            w.operator()( name, lines, true );
+            rlf_txtrw::t_write_text()(name , lines, true );
 
          } catch( rlf_txtrw::bad_text_read& br ) {
             throw rlf::rImgEx( br.what() );
@@ -1029,12 +1028,11 @@ namespace rlf {
          std::vector<cRGBAlpha> v;
 
          try {
-            rlf_txtrw::t_text_read_list reader;
-            std::list<std::string>  l;
-            reader.operator()( file, l );
+            std::vector<std::string>  l;
+            l = rlf_txtrw::t_text_read( file );
 
-            std::list<std::string>::const_iterator begin = l.begin();
-            std::list<std::string>::const_iterator end = l.end();
+            std::vector<std::string>::const_iterator begin = l.begin();
+            std::vector<std::string>::const_iterator end = l.end();
 
             while( begin != end ) {
                cRGBAlpha rgb;
@@ -1065,9 +1063,7 @@ namespace rlf {
 
       std::vector<cRGBAlpha> c_RGBLut::ReadHex( string const& file ) {
 
-         bin_read::t_bin_read reader;
-         std::vector<uint8_t> m;
-         reader.operator()( file, m );
+         std::vector<uint8_t> m = bin_read::t_bin_read( file );
 
          std::vector<cRGBAlpha> v;
 
@@ -1095,8 +1091,7 @@ namespace rlf {
             m[ 3 * i + 2 ] = l[ i ].B();
          }
 
-         bin_write::t_bin_write writer;
-         writer.operator()( file, m );
+         bin_write::t_bin_write( file, m );
          return true;
       }
 

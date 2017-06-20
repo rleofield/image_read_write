@@ -38,8 +38,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <stdexcept>
 #include <boost/filesystem.hpp>
 
-#include <test_functions.h>
-
 
 namespace rlf_txtrw {
 
@@ -125,84 +123,83 @@ namespace rlf_txtrw {
    *
    * a text file is stored in a <b>string</b> list<br>
    */
-   class t_text_read_list  {
-      t_text_read_list& operator= ( const t_text_read_list& in );
-      t_text_read_list( const t_text_read_list& in );
+//   class t_text_read_list  {
 
-      std::string _filename;
+//      std::string _filename;
 
-   public:
+//   public:
 
-      t_text_read_list(): _filename() {}
-      t_text_read_list( const std::string& filename ): _filename( filename ) {}
-      ~t_text_read_list() {}
+//      t_text_read_list( const std::string& filename ): _filename( filename ) {}
+//      t_text_read_list& operator= ( const t_text_read_list& in ) = delete;
+//      t_text_read_list( const t_text_read_list& in ) = delete;
+//      ~t_text_read_list() {}
 
-      void operator()( const std::string& filename, std::list<std::string>& lines  )  {
-         _filename = filename;
-         operator()( lines );
-      }
+//      void operator()( const std::string& filename, std::list<std::string>& lines  )  {
+//         _filename = filename;
+//         operator()( lines );
+//      }
 
-      void operator()( std::list<std::string>& lines )  {
-         if( !err::file_exists_r( _filename ) ) {
-            std::string s = err::file_not_exists( _filename );
-            throw bad_text_read( s );
-         }
+//      void operator()( std::list<std::string>& lines )  {
+//         if( !err::file_exists_r( _filename ) ) {
+//            std::string s = err::file_not_exists( _filename );
+//            throw bad_text_read( s );
+//         }
 
-         std::ifstream fp( _filename.c_str() );
+//         std::ifstream fp( _filename.c_str() );
 
-         if( !fp.is_open() ) {
-            std::string s = err::read_file( _filename );
-            throw bad_text_read( s );
-         }
+//         if( !fp.is_open() ) {
+//            std::string s = err::read_file( _filename );
+//            throw bad_text_read( s );
+//         }
 
-         while( !fp.eof() ) {
-            std::string temp;
-            getline( fp, temp );
+//         while( !fp.eof() ) {
+//            std::string temp;
+//            getline( fp, temp );
 
-            if( !fp.fail() ) {
-               // DOS & Windows: \r\n 0d0a (hex), 13,10 (decimal)
-               // Unix & Mac OS X: \n, 0a, 10
-               // Macintosh (OS 9): \r, 0d, 13
-               // replace windows /r to ;inux \n
-               if( temp.back() == 0xd ){
-                   temp = rhelper::clip(temp, temp.size()-1);
-               }
+//            if( !fp.fail() ) {
+//               // DOS & Windows: \r\n 0d0a (hex), 13,10 (decimal)
+//               // Unix & Mac OS X: \n, 0a, 10
+//               // Macintosh (OS 9): \r, 0d, 13
+//               // replace windows /r to ;inux \n
+//               if( temp.back() == 0xd ){
+//                   temp = rhelper::clip(temp, temp.size()-1);
+//               }
 
-               lines.push_back( temp );
-            } else {
-               if( !fp.eof() ) {
-                  std::string s = err::read_file( _filename );
-                  throw bad_text_read( s );
-               }
-            }
-         }
-      }
+//               lines.push_back( temp );
+//            } else {
+//               if( !fp.eof() ) {
+//                  std::string s = err::read_file( _filename );
+//                  throw bad_text_read( s );
+//               }
+//            }
+//         }
+//      }
 
 
-      operator std::list<std::string> () {
-         std::list<std::string> lines ;
-         *this = lines;
-         return std::move(lines);
-      }
+//      operator std::list<std::string> () {
+//         std::list<std::string> lines ;
+//         *this = lines;
+//         return std::move(lines);
+//      }
 
-   private:
-      t_text_read_list& operator=( std::list<std::string>& lines )  {
-         operator()(_filename,lines);
-         return *this;
-      }
+//   private:
+//      t_text_read_list& operator=( std::list<std::string>& lines )  {
+//         operator()(_filename,lines);
+//         return *this;
+//      }
 
-   };
+//   };
 
    class t_text_read_string  {
-      t_text_read_string& operator= ( const t_text_read_string& in );
-      t_text_read_string( const t_text_read_string& in );
 
       std::string _filename;
 
    public:
 
-      t_text_read_string(): _filename() {}
+      //t_text_read_string() = default;
       t_text_read_string( const std::string& filename ): _filename( filename ) {}
+      t_text_read_string& operator= ( const t_text_read_string& in ) = delete;
+      t_text_read_string( const t_text_read_string& in ) = delete;
       ~t_text_read_string() {}
 
       void operator()( const std::string& filename, std::string& str )  {
@@ -262,15 +259,15 @@ namespace rlf_txtrw {
 
 
    class t_text_read  {
-      t_text_read& operator= ( const t_text_read& in );
-      t_text_read( const t_text_read& in );
 
       std::string _filename = std::string();
 
    public:
 
-      t_text_read() {}
+      //t_text_read() = default;
       t_text_read( const std::string& filename ): _filename( filename ) {}
+      t_text_read& operator= ( const t_text_read& in ) = delete;
+      t_text_read( const t_text_read& in ) = delete;
       ~t_text_read() {}
 
       void operator()( const std::string& filename, std::vector<std::string>& lines )  {

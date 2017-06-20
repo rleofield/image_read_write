@@ -794,10 +794,9 @@ namespace rlf {
       img.reset();
       uintmax_t size = boost::filesystem::file_size( fn );
 
-      std::vector<uint8_t> buf( size );
+      std::vector<uint8_t> buf;
 
-      bin_read::t_bin_read reader;
-      reader( fn, buf, size );
+      buf = bin_read::t_bin_read( fn, size );
 
       tTiff tr( buf, img );
       tr.read();

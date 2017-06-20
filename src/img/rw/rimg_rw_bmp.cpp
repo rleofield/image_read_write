@@ -400,10 +400,7 @@ namespace rlf {
       void read( string fn, tImgLinear& rimg ) {
 
 
-         std::vector<uint8_t> buf;
-
-         bin_read::t_bin_read reader;
-         reader( fn, buf );
+         std::vector<uint8_t> buf = bin_read::t_bin_read( fn );
 
 
          FILEHEADER const* fileheader = referenceToFILEHEADER( buf );

@@ -37,6 +37,16 @@ Lib: librimgrw
 
 namespace rlf {
 
+   template <typename T>
+   inline char* to_char_ptr( std::vector<T>& b ) {
+      return reinterpret_cast<char* >( b.data()  );
+   }
+   template <typename T>
+   inline char const* to_char_ptr( std::vector<T> const& b ) {
+      return reinterpret_cast<char const* >( b.data()  );
+   }
+
+
    namespace bin_data {
 
 

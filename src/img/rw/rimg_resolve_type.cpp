@@ -74,6 +74,14 @@ namespace rlf {
     */
    namespace rimg_rw {
 
+   template <typename T>
+   inline char* to_char_ptr( std::vector<T>& b ) {
+      return reinterpret_cast<char* >( b.data()  );
+   }
+   template <typename T>
+   inline char const* to_char_ptr( std::vector<T> const& b ) {
+      return reinterpret_cast<char const* >( b.data()  );
+   }
 
 
 
@@ -89,9 +97,7 @@ namespace rlf {
 
       e_file_type findtype( string fn ) {
 
-         vector<uint8_t> v;
-         bin_read::t_bin_read reader;
-         reader( fn, v, 10 );
+         vector<uint8_t> v = bin_read::t_bin_read(fn,10);
 
          if( v.size() < 10 ) {
             return e_file_type::none;

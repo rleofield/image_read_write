@@ -248,11 +248,11 @@ namespace rlf {
             size_t tx = target[0].size();
             size_t ty = target.size();
 
-            if( ! tx == sx * scale ) {
+            if( ! (tx == sx * scale) ) {
                return;
             }
 
-            if( ! ty == sy * scale ) {
+            if( ! (ty == sy * scale) ) {
                return;
             }
 
@@ -355,11 +355,11 @@ namespace rlf {
             size_t tx = target[0].size();
             size_t ty = target.size();
 
-            if( ! tx == sx * scale ) {
+            if( ! (tx == sx * scale) ) {
                return;
             }
 
-            if( ! ty == sy * scale ) {
+            if( ! (ty == sy * scale) ) {
                return;
             }
 

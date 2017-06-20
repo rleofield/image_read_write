@@ -196,7 +196,8 @@ HEADERS += \
     src/minit/tLine.h \
     src/minit/tObjPositionSize.h \
     src/txtrw/rList.h \
-    src/txtrw/wList.h
+    src/txtrw/wList.h \
+    src/log/tLog_Category_tiff.h
 
 
 

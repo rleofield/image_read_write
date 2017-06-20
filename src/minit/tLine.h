@@ -74,10 +74,6 @@ namespace rlf_minit {
    };
 
 
-
-
-
-
    typedef tLine<double> double_line;
    typedef tLine<float> float_line;
 
